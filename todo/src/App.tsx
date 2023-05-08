@@ -20,6 +20,13 @@ function App() {
     newData[index].status = newStatus;
     settasks(newData);
   }
+
+  function deleteTask(index:number){
+    var newData:TaskType[] = [...tasks]
+    newData.splice(index,1);
+    console.log(newData, index)
+    settasks(newData);
+  }
   
   return (
     <section className="bg-background min-h-screen w-screen px-8">
@@ -27,7 +34,14 @@ function App() {
         <h1 className="text-2xl font-semibold">TODO app 💪</h1>
         <div className="flex flex-col gap-4 justify-center mt-5 transition-all">
           {tasks.map((task:TaskType, i:number)=> 
-            <Task key={i} index={i} task={task.task} status={task.status} changeStatus={changeStatus} />
+            <Task 
+              key={i} 
+              index={i} 
+              task={task.task} 
+              status={task.status} 
+              changeStatus={changeStatus} 
+              deleteTask={deleteTask}
+            />
           )}
           
           <AddTask addTask={addTask} />
