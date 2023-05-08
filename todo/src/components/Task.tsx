@@ -3,9 +3,33 @@ export type TaskType = {
 	status: boolean
 }
 
-export default function Task({task, status}:TaskType) {
-	return <button className="flex justify-between items-center">
-		<input checked={status} type="checkbox" name="" id="" />
-		<div>{task}</div>
-	</button>;
+type TaskProps = {
+	task: string,
+	status: boolean,
+	index: number,
+	changeStatus: Function
+	
+}
+
+export default function Task({task, status, index, changeStatus}:TaskProps) {
+
+	function handleClick(){
+		var newStatus:boolean = (status)? false : true
+		changeStatus(index, newStatus);
+	}
+
+	return (
+		<div>
+			<button 
+			onClick={handleClick} 
+			className="flex justify-start items-center gap-3 p-3 bg-white rounded-md"
+			>
+				<input readOnly checked={status} type="checkbox" className="w-4 h-4"/>
+				<div>{task}</div>
+			</button>
+			<div>
+
+			</div>
+		</div>
+	)
 }
